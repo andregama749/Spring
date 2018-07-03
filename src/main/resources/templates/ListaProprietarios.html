@@ -1,0 +1,51 @@
+<!DOCTYPE	html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz./thymeleaf/layout"
+	layout:decorator="LayoutPadrao"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+
+<section layout:fragment="Conteudo">
+<body>
+
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+			<h1 class="panel-title">proprietarios</h1>
+		</div>
+		<div class="panel-body">
+			<form class="form-inline" method="POST" th:object="${proprietario}"
+				th:action="@{/proprietarios}" style="margin: 20px 0">
+				<div class="form-group">
+					<input type="hidden" th:field="*{id}"> 
+					<input type="text" class="form-control" placeholder="Nome" th:field="*{nome}" />
+					<input type="text" class="form-control" placeholder="CPF" th:field="*{cpf}" />
+				
+					<button type="submit" class="btn btn-primary">Adicionar</button>
+				</div>
+			</form>		
+						
+					
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>CPF</th>
+						<th colspan=2>Ação</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="proprietario : ${proprietarios}">
+						<td th:text="${proprietario.nome}">Fiat</td>
+						<td th:text="${proprietario.cpf}">2005</td>
+
+						<td><a th:href="@{/proprietarios/alterar/}+${proprietario.id}" class="glyphicon glyphicon-pencil"></a></td>
+						<td><a th:href="@{/proprietarios/excluir/}+${proprietario.id}" class="glyphicon glyphicon-trash"></a></td>
+
+					</tr>					
+				</tbody>
+			</table>
+		</div>		
+	</div>
+</body>
+</section>
+</html>
